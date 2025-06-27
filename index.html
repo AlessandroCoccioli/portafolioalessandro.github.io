@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alessandro Coccioli - Sviluppatore & Appassionato Digitale</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            animation: float 20s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-content {
+            z-index: 3;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: slideInDown 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            animation: slideInUp 1s ease-out 0.3s both;
+        }
+
+        @keyframes slideInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            animation: slideInUp 1s ease-out 0.6s both;
+        }
+
+        .cta-button:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about {
+            background: #f8f9fa;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .profile-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            text-align: center;
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            font-weight: bold;
+        }
+
+        .skills {
+            background: white;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .skill-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 40px;
+            border-radius: 20px;
+            color: white;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: scale(1.05);
+        }
+
+        .skill-card:nth-child(2) {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .skill-card:nth-child(3) {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .skill-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .projects {
+            background: #f8f9fa;
+        }
+
+        .project-showcase {
+            display: flex; /* Use flexbox for centering */
+            flex-wrap: wrap; /* Allow items to wrap */
+            justify-content: center; /* Center items horizontally */
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add box-shadow to transition */
+            flex: 0 0 350px; /* Fixed width, no shrinking, no growing */
+            max-width: 100%; /* Ensure it doesn't overflow on small screens */
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 45px rgba(0,0,0,0.2); /* Enhance shadow on hover */
+        }
+
+        /* Specific styles for the MatureAI card */
+        .matureai-card {
+            border: 3px solid #764ba2; /* A more prominent border */
+            box-shadow: 0 20px 50px rgba(118, 75, 162, 0.3), 0 0 20px rgba(118, 75, 162, 0.1); /* Enhanced shadow with a tint */
+            transform: scale(1.02); /* Slightly larger by default */
+            transition: all 0.4s ease-in-out; /* Smoother transition */
+        }
+
+        .matureai-card:hover {
+            transform: translateY(-15px) scale(1.05); /* More pronounced lift and scale on hover */
+            box-shadow: 0 30px 70px rgba(118, 75, 162, 0.4), 0 0 30px rgba(118, 75, 162, 0.2); /* Even stronger shadow */
+        }
+
+
+        .project-header {
+            height: 200px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+
+        .project-content {
+            padding: 30px;
+        }
+
+        .contact {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 50px;
+        }
+
+        .wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="white"></path></svg>');
+            background-size: cover;
+            z-index: 2;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.2rem; }
+            .about-content { grid-template-columns: 1fr; }
+            .contact-info { flex-direction: column; gap: 30px; }
+            .section-title { font-size: 2rem; }
+            .project-showcase {
+                flex-direction: column; /* Stack projects vertically on small screens */
+                align-items: center; /* Center them */
+            }
+        }
+
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .floating-elements::before,
+        .floating-elements::after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 15s ease-in-out infinite;
+        }
+
+        .floating-elements::before {
+            top: 20%;
+            left: 10%;
+            animation-delay: -5s;
+        }
+
+        .floating-elements::after {
+            bottom: 20%;
+            right: 10%;
+            animation-delay: -10s;
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="floating-elements"></div>
+        <div class="hero-content">
+            <h1>Alessandro Coccioli</h1>
+            <p>Sviluppatore Appassionato & Visionario Digitale</p>
+            <a href="#about" class="cta-button">Scopri di più</a>
+        </div>
+        <div class="wave"></div>
+    </section>
+
+    <section id="about" class="section about">
+        <div class="about-content">
+            <div class="profile-card">
+                <div class="profile-avatar">AC</div>
+                <h3>Alessandro Coccioli</h3>
+                <p>17 anni</p>
+                <p>Erchie BR, Italia 🇮🇹</p>
+            </div>
+            <div>
+                <h2 class="section-title">Chi sono</h2>
+                <p style="font-size: 1.1rem; margin-bottom: 20px;">
+                    Sono Alessandro, un giovane sviluppatore di 17 anni con una passione travolgente per l'informatica e il mondo digitale. 
+                    La mia curiosità mi spinge costantemente a esplorare nuove tecnologie e a creare soluzioni innovative.
+                </p>
+                <p style="font-size: 1.1rem; margin-bottom: 20px;">
+                    Quando non sono davanti al computer a programmare, mi troverai probabilmente al mare - la mia seconda grande passione. 
+                    L'oceano mi inspira con la sua vastità e mi insegna che, come nel coding, ogni onda è un'opportunità per migliorare.
+                </p>
+                <p style="font-size: 1.1rem;">
+                    Combino creatività giovanile con dedizione professionale, sempre pronto ad affrontare nuove sfide e a trasformare idee in realtà digitali.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section skills">
+        <h2 class="section-title">Le mie competenze</h2>
+        <p class="section-subtitle">Tecnologie e passioni che guidano il mio lavoro</p>
+        
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-icon">💻</div>
+                <h3>Sviluppo Web</h3>
+                <p>HTML, CSS, JavaScript e framework moderni. Creo esperienze web coinvolgenti e responsive che catturano l'attenzione degli utenti.</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">🌊</div>
+                <h3>Passione per il Mare</h3>
+                <p>Il mare è la mia fonte di ispirazione. Come ogni onda è unica, ogni progetto che sviluppo ha la sua personalità distintiva.</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">🚀</div>
+                <h3>Innovazione</h3>
+                <p>Sempre alla ricerca delle ultime tendenze tecnologiche. La mia giovane età è un vantaggio per pensare fuori dagli schemi.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section projects">
+        <h2 class="section-title">I miei progetti</h2>
+        <p class="section-subtitle">Esempi del mio lavoro e della mia creatività</p>
+        
+        <div class="project-showcase">
+            <div class="project-card">
+                <div class="project-header">🎨</div>
+                <div class="project-content">
+                    <h3>Siti Web Creativi</h3>
+                    <p>Sviluppo siti web moderni e accattivanti, combinando design innovativo con funzionalità avanzate. Ogni progetto riflette la mia passione per l'estetica digitale.</p>
+                </div>
+            </div>
+            <div class="project-card matureai-card" style="order: -1;"> 
+                <div class="project-header">🤖</div>
+                <div class="project-content">
+                    <h3>MatureAI - Progetto PCTO Intel</h3>
+                    <p>Questo progetto di Intelligenza Artificiale è stato sviluppato durante un PCTO in collaborazione con Intel. MatureAI è in grado di riconoscere la frutta marcia, acerba o matura utilizzando algoritmi di AI avanzati. Un'esperienza formativa che ha unito teoria e pratica nel mondo dell'AI.</p>
+                    <a href="https://matureai.tiiny.site" target="_blank" style="display: inline-block; margin-top: 15px; padding: 10px 20px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; text-decoration: none; border-radius: 25px; font-size: 0.9rem; transition: transform 0.3s ease;">Visualizza Progetto</a>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-header">⚡</div>
+                <div class="project-content">
+                    <h3>Applicazioni Web</h3>
+                    <p>Creo applicazioni web interattive e performanti, sempre attento all'esperienza utente e alle ultime tecnologie del settore.</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-header">🎯</div>
+                <div class="project-content">
+                    <h3>Soluzioni Custom</h3>
+                    <p>Ogni cliente ha esigenze uniche. Sviluppo soluzioni personalizzate che si adattano perfettamente alle necessità specifiche di ogni progetto.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section contact">
+        <h2 class="section-title" style="color: white;">Lavoriamo insieme</h2>
+        <p class="section-subtitle" style="color: rgba(255,255,255,0.8);">
+            Pronto a portare le tue idee nel mondo digitale
+        </p>
+        
+        <div class="contact-info">
+            <div class="contact-item">
+                <div style="font-size: 2rem;">📧</div>
+                <div>
+                    <strong>Email</strong>
+                    <p>alessandrococcioli9@gmail.com</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div style="font-size: 2rem;">🌍</div>
+                <div>
+                    <strong>Località</strong>
+                    <p>Erchie BR, Italia</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div style="font-size: 2rem;">⚡</div>
+                <div>
+                    <strong>Disponibilità</strong>
+                    <p>Sempre pronto per nuove sfide</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Smooth scrolling per i link interni
+        document.querySelector('.cta-button').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('#about').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Osserva tutti gli elementi con animazione
+        document.querySelectorAll('.skill-card, .project-card, .profile-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(50px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+       
+    </script>
+</body>
+</html>
